@@ -25,7 +25,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I&apos;I'm a Truck Owner"
+        android:text="I&apos;m a Truck Owner"
         android:id="@+id/owner_button"
         android:layout_below="@+id/customer_button"
         android:layout_centerHorizontal="true"
