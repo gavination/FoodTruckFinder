@@ -42,6 +42,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.gavin.foodtruckfinder.StartActivity" />
         </activity>
+        <activity
+            android:name=".TruckListActivity"
+            android:label="@string/title_activity_truck_list" >
+        </activity>
     </application>
 
 </manifest>
