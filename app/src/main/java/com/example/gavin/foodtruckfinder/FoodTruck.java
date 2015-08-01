@@ -6,6 +6,8 @@ package com.example.gavin.foodtruckfinder;
 public class FoodTruck {
     private String name;
     private String cuisineType;
+    private String latitude;
+    private String longitude;
     // Need variable for location
 
     public FoodTruck( String name, String cuisineType) {

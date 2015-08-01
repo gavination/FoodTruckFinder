@@ -15,13 +15,6 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_start, menu);
-
 
         Button customerButton = (Button) findViewById(R.id.customer_button);
         Button truckOwnerButton = (Button) findViewById(R.id.owner_button);
@@ -41,9 +34,15 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Opens Truck Activity
                 Context context = getApplicationContext();
-                Intent intent = new Intent(context,  TruckListActivity.class);
+                Intent intent = new Intent(context, TruckListActivity.class);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_start, menu);
 
         return true;
     }

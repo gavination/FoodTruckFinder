@@ -5,6 +5,9 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,6 +25,32 @@ public class CustomerMapActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_map);
         setUpMapIfNeeded();
+    }
+
+    @Override
+    //this is supposed to inflate a menu from menu_map.xml
+    //cannot get it to work for some reason
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_map, menu);
+
+        return true;
+    }
+
+    @Override
+    //this is supposed to react to item clicks once the action bar is made.
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -66,7 +95,7 @@ public class CustomerMapActivity extends FragmentActivity {
      */
     private void setUpMap() {
         double latitude;
-        double longituge;
+        double longitude;
         // mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
         mMap.setMyLocationEnabled(true);
 
@@ -82,34 +111,29 @@ public class CustomerMapActivity extends FragmentActivity {
         //Get current location
         Location myLocation = locationManager.getLastKnownLocation(provider);
 
-        if (myLocation != null){
-            //Getting the latitude here
+        if(myLocation != null){
             latitude = myLocation.getLatitude();
-            //And getting the longitude
-            longituge = myLocation.getLongitude();
+            longitude = myLocation.getLongitude();
+        }else{
+            Location   getLastLocation = locationManager.getLastKnownLocation
+                    (LocationManager.PASSIVE_PROVIDER);
+            longitude = getLastLocation.getLongitude();
+            latitude = getLastLocation.getLatitude();
         }
-        else{
-            Location lastLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-            //Getting the latitude here
-            latitude = myLocation.getLatitude();
-            //And getting the longitude
-            longituge = myLocation.getLongitude();
-        }
-
 
         //Set the map type
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
 
         //Did you know Java has LatLng objects? me either!
-        LatLng latLng = new LatLng(latitude, longituge);
+        LatLng latLng = new LatLng(latitude, longitude);
 
         //Show current location on map
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         //Zoom in just right
         mMap.animateCamera(CameraUpdateFactory.zoomTo(20));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longituge)).title("Your current location"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Your current location"));
 
 
 
